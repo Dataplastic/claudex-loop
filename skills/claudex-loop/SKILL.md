@@ -5,7 +5,7 @@ description: "Harden a plan with independent Claude/Codex review, then optionall
 
 # Claudex Loop
 
-**simBrigade fork:** when the plan is for a simBrigade product (it ends as issues SSSF builds), read [SIMBRIGADE.md](SIMBRIGADE.md) before Phase 0; it wins where it differs from this file.
+**simBrigade fork:** when the plan is for a simBrigade product (it ends as issues SSSF builds), read [SIMBRIGADE.md](SIMBRIGADE.md) before Phase 0; it wins where it differs from this file. Its section 6 replaces Phase 3: the approved plan's issues are published to It's a Plan, not built.
 
 The current conversation owns requirements, planning and coordination. The other provider reviews the plan. Either provider can build; the provider that did not build inspects the final code in a fresh session.
 
