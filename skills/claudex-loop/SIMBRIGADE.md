@@ -1,7 +1,8 @@
 # simBrigade planning addendum
 
 This addendum applies when the plan is for a product built by the simBrigade factory, where
-the plan ends as issues that SSSF builds under auto pilot. Where it differs from
+the plan ends as issues that SSSF builds under auto pilot. Sections 1-5 shape the plan and its
+review; section 6 publishes the approved plan's issues. Where it differs from
 [SKILL.md](SKILL.md), this addendum wins.
 
 Why it exists: test 1 (12 October 2026, a blind replay of html2idml's planning from commit
@@ -67,3 +68,51 @@ Stop the review loop and ask the owner when:
 Do not extend the round budget by default. Present what is open, the host's position and a
 recommendation. An approval of an earlier revision still counts only for that revision's
 SHA256.
+
+## 6. Publish the issues to It's a Plan
+
+The plan's issues become issues in It's a Plan only through this step, and only when both
+of these hold:
+
+- the plan is APPROVED for its current SHA256 (the runner's `check` passes), and
+- the owner says to publish and names the It's a Plan project (its key, for example `H2`).
+
+Without an approval, publish only if the owner explicitly says so for this plan; record that
+override in the log.
+
+**Tools.** Use the It's a Plan MCP server (`itsaplan`) and only these tools: `list_projects`,
+`get_project`, `list_issues`, `search_issues`, `get_issue`, `create_issue` and
+`link_issues`. Never update, close or delete an issue, and never add labels, a Cycle,
+assignees or comments.
+
+**Before creating anything,** list the project's issues. If any of the plan's titles already
+exist there (a second run), stop and ask the owner instead of creating duplicates.
+
+**Order and keys.** Create the issues one at a time in the plan's order, and note each new
+key. A later issue's dependencies refer to the keys already created.
+
+**Title and body.** The title is the plan's issue title without its local id. The body
+holds, in this order:
+
+1. the issue's one- or two-sentence goal;
+2. `## Requirements`, numbered as in the plan;
+3. `## Edge cases`;
+4. `## Out of scope`;
+5. `## Needs`, with each `depends on:` rewritten to the real key (`depends on: H2-3`).
+   Every Needs item is a single line, because the factory reads only the first line of an
+   item. `owner:` items are things the owner must do before the issue can start;
+6. `## After the merge`, when the plan has an owner check that does not block the sprint;
+7. a last line: `Planned in PLAN.md, SHA256 <first 12 characters>.`
+
+Do not add requirements, edge cases or explanations that are not in the approved plan; the
+issue text is the contract that SSSF builds and Idea reviews against. When the project
+supports issue relations, also link each dependency with `link_issues`; the `depends on:`
+line is still what the factory reads.
+
+**No mandate.** Create every issue without labels. A label set at creation never counts as
+an auto pilot mandate; the owner reads the issues and adds the label and the Cycle.
+
+**Afterwards.** Do not edit `PLAN.md`, because that would invalidate the approval. Append a
+table to the log with the plan id, the new key and the title of each issue. Then tell the
+owner the keys, the `owner:` needs that must be met before the first sprint, and that the
+issues wait for their label and Cycle.
