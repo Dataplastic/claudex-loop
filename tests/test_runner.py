@@ -125,6 +125,7 @@ class RunnerTests(unittest.TestCase):
                 self.assertEqual(record["plan"], str(self.plan))
                 self.assertEqual(record["plan_sha256"], runner.digest(self.plan.read_bytes()))
                 self.assertIn(str(self.plan), (path.parent / "prompt.txt").read_text())
+                self.assertIn("Review brief", (path.parent / "prompt.txt").read_text())
                 self.assertEqual(record["response"]["verdict"], "APPROVED")
 
     def test_unpinned_and_explicit_model_selection(self):
