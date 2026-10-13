@@ -64,6 +64,15 @@ the reviewer checks them too. html2idml-v2's plan said A4 gives a viewport of
 Literal formats need the same care: `<Leading type="unit">pt</Leading>` was meant as "the
 value in points", and the builder wrote `18 pt`; write the literal output, `18`.
 
+Before writing the issues, read the factory's own rules for them in the product repository:
+`skills/writing-auto-pilot-issues.md` (list `skills/` and read every skill whose `when` fits
+writing issues). They hold what the factory learned from earlier sprints, such as giving
+exact examples for every relevant `white-space` mode, whitespace-only content included.
+Follow them in every issue, and ask the reviewer to check the issues against them too. If a
+skill and this addendum disagree, put the choice to the owner. html2idml-v2's H2I2-8 gave one
+example per `white-space` mode and none with leading or trailing spaces in `pre`, or with a
+nested `white-space`; the skill asks for them, and the factory built them wrong.
+
 ## 4. Reference files from the program that must accept the output
 
 When the output must be accepted by a program the factory cannot run in CI (InDesign, Word,
