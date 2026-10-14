@@ -73,6 +73,12 @@ skill and this addendum disagree, put the choice to the owner. html2idml-v2's H2
 example per `white-space` mode and none with leading or trailing spaces in `pre`, or with a
 nested `white-space`; the skill asks for them, and the factory built them wrong.
 
+Read `knowledge/plan-feedback.md` in the product repository too, when it exists. Foreman, the
+factory's floor manager, adds a lesson there each time a sprint finds that a plan or an issue
+asked for the wrong thing (simBrigade decision 0022). Apply every lesson in it to the new
+plan, say in the review brief which ones you applied, and ask the reviewer to check the plan
+against them.
+
 ## 4. Reference files from the program that must accept the output
 
 When the output must be accepted by a program the factory cannot run in CI (InDesign, Word,
