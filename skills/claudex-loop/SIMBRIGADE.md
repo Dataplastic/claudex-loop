@@ -39,11 +39,39 @@ Each new mechanism in the plan, such as a server, a network fetch or a protocol 
 trace to a goal or a decision in the brief. Otherwise it goes. When in doubt, prefer the
 simpler design that meets the brief.
 
-## 3. Issues have a size limit
+## 3. Issues have a size limit, and every requirement can be checked
 
 Each issue covers one module or layer, with at most 8 requirements and 12 edge cases. No
 requirement has numbered sub-steps. Split a larger issue. If it cannot be split, tell the
 owner why.
+
+Every requirement has at least one example or edge case with a concrete, observable result
+that would be wrong if the requirement were not met. "Opens Chromium with the page's
+viewport" is not enough; "an element with `width: 100vw` measures 794 px on A4" is. "A file
+without an extension is opened as HTML" is not enough; "its body holds a `div`, not a
+`pre`" is. The factory's builder turns these examples into tests, and a requirement without
+one gets a test that passes whether the code is right or not (html2idml-v2, Sprint 2:
+H2I2-6, H2I2-7). When a behaviour cannot be shown reliably by a test (for example that
+measuring waits for `document.fonts.ready` when fonts load from `file://` before the `load`
+event), say so in the requirement and name how it is checked instead, such as the owner's
+check after the sprint. Otherwise the factory's reviewer asks for a test that cannot be
+written.
+
+Work out every number in the examples (sizes, offsets, ids, rounding) and write the result,
+not the formula alone. Put "Recompute every number in the examples" in the review brief, so
+the reviewer checks them too. html2idml-v2's plan said A4 gives a viewport of
+`(794, 1122)`, but `round(841.89 / 0.75)` is 1123, and the review did not notice.
+Literal formats need the same care: `<Leading type="unit">pt</Leading>` was meant as "the
+value in points", and the builder wrote `18 pt`; write the literal output, `18`.
+
+Before writing the issues, read the factory's own rules for them in the product repository:
+`skills/writing-auto-pilot-issues.md` (list `skills/` and read every skill whose `when` fits
+writing issues). They hold what the factory learned from earlier sprints, such as giving
+exact examples for every relevant `white-space` mode, whitespace-only content included.
+Follow them in every issue, and ask the reviewer to check the issues against them too. If a
+skill and this addendum disagree, put the choice to the owner. html2idml-v2's H2I2-8 gave one
+example per `white-space` mode and none with leading or trailing spaces in `pre`, or with a
+nested `white-space`; the skill asks for them, and the factory built them wrong.
 
 ## 4. Reference files from the program that must accept the output
 
