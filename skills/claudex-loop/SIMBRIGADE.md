@@ -105,6 +105,13 @@ SHA256.
 
 ## 6. Publish the issues to It's a Plan
 
+**When Cockpit runs the plan** (simBrigade's decision 0026; Cockpit says so when it starts
+the session), Cockpit publishes: it checks the approval, creates the issues with the body
+below and links them. The host does not publish then; it tells the owner the plan is ready
+and that Publish is on the Planning page. Cockpit may put the issues in the active Cycle when
+the owner chooses that at Publish, and it never adds a label. Run without Cockpit, the host
+publishes as the rest of this section says.
+
 The plan's issues become issues in It's a Plan only through this step, and only when both
 of these hold:
 
