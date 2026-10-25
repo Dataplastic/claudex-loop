@@ -64,6 +64,11 @@ the reviewer checks them too. html2idml-v2's plan said A4 gives a viewport of
 Literal formats need the same care: `<Leading type="unit">pt</Leading>` was meant as "the
 value in points", and the builder wrote `18 pt`; write the literal output, `18`.
 
+The format of an issue (its sections, their limits, the Needs words and how a check is
+named) is one contract in simBrigade, `contracts/issue-text.json` (simBrigade's decision
+0028), which Cockpit's Publish and the factory's preflight read; this addendum and the
+factory's skill say why it is as it is.
+
 Before writing the issues, read the factory's own rules for them in the product repository:
 `skills/writing-auto-pilot-issues.md` (list `skills/` and read every skill whose `when` fits
 writing issues). They hold what the factory learned from earlier sprints, such as giving
@@ -142,7 +147,12 @@ holds, in this order:
 5. `## Needs`, with each `depends on:` rewritten to the real key (`depends on: H2-3`).
    Every Needs item is a single line, because the factory reads only the first line of an
    item. `owner:` items are things the owner must do before the issue can start;
-6. `## After the merge`, when the plan has an owner check that does not block the sprint;
+6. `## After the merge`, when the plan has an owner check that does not block the sprint.
+   Each item names a check in the product's `adws/adw_sssf_config/checks.toml` as
+   `run the check "NAME"`, so Cockpit can prepare it. When no check there fits, the plan
+   proposes one (its name, its command writing into `{out}`, the files to open) for the owner
+   to add before the sprint; Cockpit's Publish and the sprint's preflight say so until it is
+   there (html2idml-v2, Sprint 7: H2I2-22 asked for a bare landscape command);
 7. a last line: `Planned in PLAN.md, SHA256 <first 12 characters>.`
 
 Do not add requirements, edge cases or explanations that are not in the approved plan; the
