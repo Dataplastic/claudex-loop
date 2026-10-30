@@ -64,6 +64,25 @@ the reviewer checks them too. html2idml-v2's plan said A4 gives a viewport of
 Literal formats need the same care: `<Leading type="unit">pt</Leading>` was meant as "the
 value in points", and the builder wrote `18 pt`; write the literal output, `18`.
 
+A measured value (a width, an offset, a position from the browser) has a tolerance of at
+least 1 px, or is a whole number. The factory's CI runs Chromium on Linux, which measures text
+in whole pixels; the Mac the plan was checked on gives fractions. html2idml-v2's N12 asked for
+marker widths within 0.5 px of `30.53`, CI measured `30`, and the issue went to the owner
+(H2I2-37, Sprint C).
+
+Before an issue adds a field to a dataclass, or changes a type's fields in any way, search the
+product's tests for assertions on that type's fields: the exact set of field names, the order,
+or which field is last. Each such test is named in the issue's Needs as
+`existing test: <path>` with the exact change it needs, and the requirement that keeps the
+existing tests as they are names it as the exception. Otherwise the issue cannot be met:
+html2idml-v2's N12 and N13 added fields to `RawElement` and `ParagraphStyle` while
+`test_measure_requirements.py` and `test_all_caps_writer.py` froze their fields, and both went
+to the owner as plan defects (H2I2-37, H2I2-38).
+
+A sprint holds at most the product's issues per sprint (`SB_SPRINT_MAX_ISSUES` in Cockpit's
+Settings, 5 unless the owner changed it). Group the issues into sprints within that limit, or
+ask the owner to raise it; Cockpit's Publish warns when a sprint holds more.
+
 The format of an issue (its sections, their limits, the Needs words and how a check is
 named) is one contract in simBrigade, `contracts/issue-text.json` (simBrigade's decision
 0028), which Cockpit's Publish and the factory's preflight read; this addendum and the
